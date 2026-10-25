@@ -170,9 +170,10 @@ h1,h2,h3,p{margin:0}
 .trailer{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;background:var(--stage);box-shadow:0 2.4rem 4.8rem rgba(0,0,0,.6);overflow:hidden}
 .trailer img,.trailer iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
 .trailer__play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,var(--scrim-clear) 40%,var(--scrim) 100%);border:0;padding:0;cursor:pointer;color:var(--on-spotlight)}
-.trailer__disc{width:7.2rem;height:7.2rem;border-radius:999px;background:var(--spotlight);display:grid;place-items:center;box-shadow:var(--glow);transition:transform .3s var(--ease)}
-.trailer__disc svg{width:2.4rem;height:2.4rem;margin-left:.36rem}
-@media (any-hover:hover){.trailer__play:hover .trailer__disc{transform:scale(1.08)}}
+.trailer__disc{display:grid;place-items:center;color:var(--ink-muted);filter:drop-shadow(0 .2rem 1.2rem var(--scrim-strong));transition:color .25s var(--ease),transform .3s var(--ease)}
+.trailer__disc svg{width:6.4rem;height:6.4rem}
+.trailer__play:focus-visible .trailer__disc{color:var(--spotlight)}
+@media (any-hover:hover){.trailer__play:hover .trailer__disc{color:var(--spotlight);transform:scale(1.08)}}
 .trailer__label{position:absolute;left:3.2rem;bottom:2.8rem;font-family:var(--font-display);font-size:2.4rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
 .trailer__alt{display:flex;justify-content:space-between;gap:2rem;margin-top:1.4rem;font-size:1.4rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)}
 .trailer__alt a{text-decoration:none;border-bottom:.1rem solid currentColor}
@@ -196,7 +197,7 @@ h1,h2,h3,p{margin:0}
   .hero__cta{flex-direction:column;gap:1.6rem;margin-top:2rem}
   .hero__laurel{display:none}
   .trailer-wrap{margin-top:2.8rem;min-width:0}
-  .trailer__disc{width:4.8rem;height:4.8rem}.trailer__disc svg{width:1.6rem;height:1.6rem;margin-left:.24rem}
+  .trailer__disc svg{width:4.4rem;height:4.4rem}
   .trailer__label{font-size:1.8rem;left:1.6rem;bottom:1.4rem}
   .brand{font-size:2rem}
 }
