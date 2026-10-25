@@ -189,7 +189,8 @@ h1,h2,h3,p{margin:0}
 .hero__head,.hero__cta{max-height:40rem;transition:max-height .7s var(--ease),opacity .35s ease,transform .7s var(--ease),margin .7s var(--ease)}
 .playing .hero{padding-top:8.5rem;padding-bottom:4rem}
 .playing .hero__head,.playing .hero__cta{max-height:0;opacity:0;transform:translateY(-8rem);margin-top:0;overflow:hidden;pointer-events:none}
-.playing .trailer-wrap{--tw:min(100vw,calc((100svh - 13rem) * 1.7778));margin-top:0}
+.playing .trailer-wrap{--tw:min(calc(100% + var(--gutter) * 2),calc((100svh - 13rem) * 1.7778));margin-top:0}
+.playing .trailer__alt{padding-inline:max(0px,calc(var(--gutter) - (100vw - var(--tw)) / 2))}
 .header__cta{display:none;font-size:1.6rem;padding:1rem 1.8rem}
 .playing .header__cta{display:inline-flex;animation:liftIn .6s var(--ease) .3s both}
 .playing .brand{animation:liftIn .6s var(--ease) .15s both}
