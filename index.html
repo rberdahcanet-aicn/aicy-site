@@ -155,8 +155,8 @@ h1,h2,h3,p{margin:0}
   background:
     radial-gradient(ellipse 70% 120% at 50% 0%,var(--scrim-clear) 62%,var(--scrim) 100%),
     url("img/paper-texture.webp") center top/480px 480px repeat,
-    linear-gradient(180deg,var(--haze) 0,var(--haze) 24rem,var(--smoke) 36rem,var(--bronze) 48rem,var(--curtain) 62rem,var(--stage) 78rem);
-  background-blend-mode:normal,multiply,normal}
+    linear-gradient(180deg,var(--paper) 0,var(--paper) 24rem,var(--smoke) 36rem,var(--bronze) 48rem,var(--curtain) 62rem,var(--stage) 78rem);
+  background-blend-mode:normal,soft-light,normal}
 .hero::before{content:"";position:absolute;inset:0;background:var(--stage);pointer-events:none;animation:lightsUp 1.6s var(--ease) .1s both;z-index:1}
 @keyframes lightsUp{from{opacity:.85}to{opacity:0}}
 .hero>*{position:relative;z-index:2}
