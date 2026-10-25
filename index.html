@@ -345,6 +345,16 @@ h1,h2,h3,p{margin:0}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .marquee{overflow-x:auto}
 }
+/* ---------- desktop and tablet only: "Read the full synopsis" toggle ---------- */
+.more--synopsis{display:none}
+@media (min-width:768px){
+  .synopsis-fold:not(.is-open){max-height:11em;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,currentColor 45%,transparent);mask-image:linear-gradient(180deg,currentColor 45%,transparent)}
+  .more--synopsis{display:inline-flex;align-items:center;gap:.8rem;margin-top:2rem;padding:.8rem 0;background:none;border:0;border-bottom:.1rem solid currentColor;color:var(--spotlight);font:500 1.4rem/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:opacity .2s var(--ease)}
+  .more--synopsis:hover{opacity:.8}
+  .more--synopsis:focus-visible{outline:.2rem solid var(--spotlight);outline-offset:.4rem}
+  .more--synopsis .arrow{display:inline-block;transition:transform .3s var(--ease)}
+  .more--synopsis[aria-expanded="true"] .arrow{transform:rotate(180deg)}
+}
 /* ---------- phone only: read more toggles and swipe carousels ---------- */
 .more,.dots{display:none}
 .film__more{display:grid;gap:4rem}
@@ -465,12 +475,13 @@ h1,h2,h3,p{margin:0}
         <p class="lead">Since October 7th, 2023, Rapaport has been on a rollercoaster ride of emotions, from the euphoric highs of finding his Jewish identity to the gut-wrenching lows of being canceled by Hollywood for his outspoken views in support of Israel. This documentary captures the raw, unfiltered truth of his experiences, mixing side-splitting comedy with heartbreaking reality. It's a wild ride, filled with laughter, tears, and a whole lot of m*ther f*ckers.</p>
         <div>
           <p class="eyebrow" style="margin-bottom:2rem">Synopsis</p>
-          <div class="body muted-first">
+          <div class="body muted-first synopsis-fold" id="synopsis-text">
             <p>Am I Cancelled Yet? is a groundbreaking new genre of film that blends stand-up comedy with real-life drama, taking audiences on Michael Rapaport's extraordinary emotional journey since October 7, 2023. At the heart of the film is Rapaport's stand-up show, the narrative thread that pulls us in and out of his story. His sharp observations, outrageous humor, and relentless kvetching provide a running commentary on events as they unfold, while vérité scenes reveal the man behind the microphone.</p>
             <p>The film moves seamlessly between the stage and real life: Rapaport visits the sites of the October 7 massacres, meets survivors and hostage families, and discovers a deepening connection to his Jewish identity. Back in the US, his outspoken support for Israel puts his career and reputation under pressure. But the consequences are not his alone.</p>
             <p>Beside him throughout is his wife, Kebe, who witnesses firsthand the personal cost of being unapologetically visible. As the couple faces violence both on the street and online, Kebe emerges as the quiet hero of the story, a sensitive, hopeful and deeply grounded presence, genuinely worried for her husband while standing firmly by his side. Behind Michael's loud public voice is a woman navigating fear, love and uncertainty, reminding us that outspoken conviction always has a human cost.</p>
             <p>Through its dynamic intercut between comedy and vérité, Am I Cancelled Yet? moves between laughter and grief, bravado and vulnerability, public confrontation and private fear. Funny, raw and deeply human, the film asks what happens when shutting up is NOT an option.</p>
           </div>
+          <button class="more--synopsis" type="button" aria-controls="synopsis-text" aria-expanded="false"><span class="more__label">Read the full synopsis</span> <span class="arrow" aria-hidden="true">&#8595;</span></button>
         </div>
       </div>
     </div>
@@ -698,6 +709,18 @@ h1,h2,h3,p{margin:0}
     document.body.classList.add("playing");
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
+
+  /* Desktop and tablet: "Read the full synopsis" toggle (phones use the Read more toggle instead) */
+  var synBtn = document.querySelector(".more--synopsis");
+  var synText = document.getElementById("synopsis-text");
+  if (synBtn && synText) {
+    synBtn.addEventListener("click", function(){
+      var open = synText.classList.toggle("is-open");
+      synBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      synBtn.querySelector(".more__label").textContent = open ? "Show less" : "Read the full synopsis";
+      if (!open && synText.getBoundingClientRect().top < 0) synText.scrollIntoView({block: "start", behavior: "smooth"});
+    });
+  }
 
   /* Waitlist: sends sign-ups to the Kit form "Newsletter site" (form 10093957).
      Kit field names: email_address, fields[first_name], fields[last_name] (custom field "Last name"). */
