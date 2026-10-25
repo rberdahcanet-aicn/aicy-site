@@ -264,6 +264,15 @@ h1,h2,h3,p{margin:0}
 .screening__date--tba{color:var(--ink-muted);font-size:3.2rem}
 .screening__name{font-family:var(--font-display);font-size:3.2rem;line-height:1.05;text-transform:uppercase}
 .screening__note{font-size:1.6rem;color:var(--ink-muted);margin-top:.6rem}
+.past{margin-top:4.8rem}
+.past__toggle{display:inline-flex;align-items:center;gap:.8rem;padding:.8rem 0;border-bottom:.1rem solid currentColor;color:var(--spotlight);font-weight:500;font-size:1.4rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;list-style:none;transition:opacity .2s var(--ease)}
+.past__toggle::-webkit-details-marker{display:none}
+.past__toggle:hover{opacity:.8}
+.past__toggle:focus-visible{outline:.2rem solid var(--spotlight);outline-offset:.4rem}
+.past__toggle .arrow{display:inline-block;transition:transform .3s var(--ease)}
+.past[open] .past__toggle .arrow{transform:rotate(180deg)}
+.past__list{margin-top:3.2rem}
+.screening__date--past{color:var(--ink-muted);font-size:3.2rem}
 .screenings-top__laurels{display:flex;flex-wrap:wrap;gap:3.2rem;justify-self:end;align-items:center}
 .screenings-top__laurel{height:14.6rem;width:auto}
 @media (max-width:767px){.screening{grid-template-columns:1fr;gap:1.2rem}.screening__date{font-size:3.6rem}.screenings-top__laurels{justify-self:stretch;flex-wrap:nowrap;gap:2rem;max-width:36rem}.screenings-top__laurel{height:auto;width:calc(50% - 1rem)}.screening .btn{justify-self:start}}
@@ -535,6 +544,16 @@ h1,h2,h3,p{margin:0}
           <span></span>
         </li>
       </ul>
+      <details class="past">
+        <summary class="past__toggle"><span>Past screenings</span> <span class="arrow" aria-hidden="true">&#8595;</span></summary>
+        <ul class="screenings past__list">
+          <li class="screening">
+            <span class="screening__date screening__date--past">Jun 2026</span>
+            <div><p class="screening__name">Private screening supported by Tribeca Festival</p><p class="screening__note">Michael and Ruth in attendance</p></div>
+            <span></span>
+          </li>
+        </ul>
+      </details>
     </div>
   </section>
 
