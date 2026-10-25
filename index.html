@@ -149,7 +149,7 @@ h1,h2,h3,p{margin:0}
 .ig{white-space:nowrap}
 .nav{display:flex;gap:3rem;list-style:none;margin:0;padding:0}
 .nav a,.ig{font-weight:500;font-size:1.4rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;position:relative;padding-block:.4rem}
-.nav a::after,.ig::after{content:"";position:absolute;left:0;bottom:-.2rem;height:.2rem;width:0;background:currentColor;transition:width .3s ease-in-out}
+.nav a::after,.ig::after{content:"";position:absolute;left:0;bottom:-.2rem;height:.2rem;width:0;background:var(--spotlight);transition:width .3s ease-in-out}
 @media (any-hover:hover){.nav a:hover::after,.ig:hover::after{width:100%}}
 .header__right{display:flex;align-items:center;gap:4rem}
 @media (max-width:991px){.nav{display:none}}
