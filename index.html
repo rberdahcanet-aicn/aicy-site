@@ -334,6 +334,42 @@ h1,h2,h3,p{margin:0}
   *,*::before,*::after{animation:none!important;transition:none!important}
   .marquee{overflow-x:auto}
 }
+/* ---------- phone only: read more toggles and swipe carousels ---------- */
+.more,.dots{display:none}
+.film__more{display:grid;gap:4rem}
+@media (max-width:767px){
+  .is-clamped:not(.is-open):not(.fits){max-height:var(--clamp,12em);overflow:hidden;-webkit-mask-image:linear-gradient(180deg,currentColor 50%,transparent);mask-image:linear-gradient(180deg,currentColor 50%,transparent)}
+  .more{display:inline-flex;align-items:center;gap:.8rem;margin-top:1.6rem;padding:.8rem 0;background:none;border:0;border-bottom:.1rem solid currentColor;color:inherit;font:500 1.3rem/1 var(--font-sans);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+  .more .arrow{display:inline-block;transition:transform .3s var(--ease)}
+  .more[aria-expanded="true"] .arrow{transform:rotate(180deg)}
+  .more[hidden]{display:none}
+  .card .more{justify-self:start}
+  .film__text>.more,.chosen .film__text>.more{margin-top:-2.4rem;justify-self:start}
+
+  .carousel{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:86%;gap:1.6rem;align-items:start;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scrollbar-width:none;margin-inline:calc(var(--gutter)*-1);padding-inline:var(--gutter);scroll-padding-inline:var(--gutter)}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel>*{scroll-snap-align:start;min-width:0}
+  .carousel:focus-visible{outline:.2rem solid var(--spotlight);outline-offset:.4rem}
+  .dots{display:flex;align-items:center;gap:.4rem;margin-top:2rem}
+  .dots button{display:grid;place-items:center;width:3.2rem;height:3.2rem;padding:0;border:0;background:none;cursor:pointer;color:inherit}
+  .dots button::before{content:"";width:.8rem;height:.8rem;border-radius:999px;background:currentColor;opacity:.35;transition:width .3s var(--ease),opacity .3s}
+  .dots button[aria-current="true"]::before{width:2.4rem;opacity:1;background:var(--spotlight)}
+  .dots__count{margin-left:auto;font-size:1.3rem;letter-spacing:.12em;color:var(--ink-muted)}
+
+  .film__poster{max-width:30rem}
+  /* filmmakers: one bio per slide */
+  .people.carousel{gap:2rem}
+  .person__photo{aspect-ratio:4/4.4}
+  /* team: cards side by side */
+  .team.carousel .card{min-height:44rem}
+  /* screenings: rows become cards */
+  .screenings.carousel{border-top:0;grid-auto-columns:78%}
+  .screenings.carousel .screening{border:.1rem solid var(--line);padding:2.4rem;min-height:22rem;align-content:start}
+  /* fact sheet: two columns */
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 2rem}
+  .fact dd{font-size:2rem}
+}
+@media (max-width:767px) and (prefers-reduced-motion:reduce){.carousel{scroll-behavior:auto}}
 </style>
 
 <header class="header wrap">
@@ -680,4 +716,136 @@ h1,h2,h3,p{margin:0}
 </script>
 
 
+<script>
+/* Phone only: "Read more" toggles for long texts and swipe carousels for long sections.
+   Styles live under "phone only" in the CSS; on wider screens none of this shows. */
+(function(){
+  var phone = window.matchMedia("(max-width:767px)");
+  var reduce = window.matchMedia("(prefers-reduced-motion:reduce)");
+
+  /* ---- Read more ---- */
+  /* The film: lead and synopsis fold together under one toggle */
+  var lead = document.querySelector(".film__text > .lead");
+  if (lead && lead.nextElementSibling) {
+    var wrap = document.createElement("div");
+    wrap.className = "film__more";
+    var synopsisNode = lead.nextElementSibling;
+    lead.parentNode.insertBefore(wrap, lead);
+    wrap.appendChild(lead);
+    wrap.appendChild(synopsisNode);
+  }
+  var clamps = [
+    [".film__more", "15em"],
+    [".person .body", "9em"],
+    [".card__bio", "7.6em"],
+    [".chosen .body", "9em"]
+  ];
+  var n = 0, toggles = [];
+  clamps.forEach(function(c){
+    document.querySelectorAll(c[0]).forEach(function(el){
+      var id = el.id || ("more-" + (++n));
+      el.id = id;
+      el.classList.add("is-clamped");
+      el.style.setProperty("--clamp", c[1]);
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "more";
+      b.setAttribute("aria-controls", id);
+      b.setAttribute("aria-expanded", "false");
+      b.innerHTML = '<span class="more__label">Read more</span> <span class="arrow" aria-hidden="true">&#8595;</span>';
+      b.addEventListener("click", function(e){
+        e.stopPropagation();
+        var open = el.classList.toggle("is-open");
+        b.setAttribute("aria-expanded", open ? "true" : "false");
+        b.querySelector(".more__label").textContent = open ? "Read less" : "Read more";
+        if (!open && el.getBoundingClientRect().top < 0) {
+          el.scrollIntoView({block: "start", behavior: reduce.matches ? "auto" : "smooth"});
+        }
+      });
+      el.insertAdjacentElement("afterend", b);
+      toggles.push([el, b]);
+    });
+  });
+  function fit(){
+    toggles.forEach(function(t){
+      var el = t[0], b = t[1];
+      if (el.classList.contains("is-open")) return;
+      el.classList.remove("fits");
+      var fits = !phone.matches || el.scrollHeight <= el.clientHeight + 4;
+      el.classList.toggle("fits", fits);
+      b.hidden = fits;
+    });
+  }
+
+  /* ---- Carousels ---- */
+  var sets = [
+    [".people", "Filmmakers"],
+    [".team", "Team"],
+    [".screenings", "Screenings"]
+  ];
+  var carousels = [];
+  sets.forEach(function(s){
+    var track = document.querySelector(s[0]);
+    if (!track) return;
+    var items = Array.prototype.slice.call(track.children);
+    var dots = document.createElement("div");
+    dots.className = "dots";
+    items.forEach(function(item, i){
+      var d = document.createElement("button");
+      d.type = "button";
+      d.setAttribute("aria-label", s[1] + ": go to " + (i + 1) + " of " + items.length);
+      d.addEventListener("click", function(){ go(i); });
+      dots.appendChild(d);
+    });
+    var count = document.createElement("span");
+    count.className = "dots__count";
+    count.setAttribute("aria-hidden", "true");
+    dots.appendChild(count);
+    track.insertAdjacentElement("afterend", dots);
+
+    function go(i){
+      var pad = parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      track.scrollTo({left: items[i].offsetLeft - track.offsetLeft - pad, behavior: reduce.matches ? "auto" : "smooth"});
+    }
+    function current(){
+      var mid = track.scrollLeft + track.clientWidth / 3, best = 0;
+      items.forEach(function(item, i){ if (item.offsetLeft - track.offsetLeft <= mid) best = i; });
+      if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) best = items.length - 1;
+      Array.prototype.forEach.call(dots.querySelectorAll("button"), function(d, i){
+        d.setAttribute("aria-current", i === best ? "true" : "false");
+      });
+      count.textContent = (best + 1) + " / " + items.length;
+    }
+    var tick;
+    track.addEventListener("scroll", function(){ cancelAnimationFrame(tick); tick = requestAnimationFrame(current); }, {passive: true});
+    carousels.push({track: track, items: items, label: s[1], update: current});
+  });
+  function mode(){
+    carousels.forEach(function(c){
+      var on = phone.matches;
+      c.track.classList.toggle("carousel", on);
+      if (on) {
+        c.track.setAttribute("role", "region");
+        c.track.setAttribute("aria-roledescription", "carousel");
+        c.track.setAttribute("aria-label", c.label);
+        c.track.tabIndex = 0;
+        c.items.forEach(function(item, i){
+          item.setAttribute("aria-roledescription", "slide");
+          item.setAttribute("aria-label", (i + 1) + " of " + c.items.length);
+        });
+        c.update();
+      } else {
+        ["role", "aria-roledescription", "aria-label", "tabindex"].forEach(function(a){ c.track.removeAttribute(a); });
+        c.items.forEach(function(item){ item.removeAttribute("aria-roledescription"); item.removeAttribute("aria-label"); });
+      }
+    });
+    fit();
+  }
+  mode();
+  if (phone.addEventListener) phone.addEventListener("change", mode); else phone.addListener(mode);
+  var rt;
+  window.addEventListener("resize", function(){ clearTimeout(rt); rt = setTimeout(fit, 150); });
+  window.addEventListener("load", fit);
+})();
+</script>
 </body></html>
