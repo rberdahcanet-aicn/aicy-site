@@ -683,8 +683,9 @@ h1,h2,h3,p{margin:0}
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  /* Waitlist: paste a form endpoint (Formspree, Mailchimp, etc.) to start collecting emails */
-  var WAITLIST_ENDPOINT = "";
+  /* Waitlist: sends sign-ups to the Kit form "Newsletter site" (form 10093957).
+     Kit field names: email_address, fields[first_name], fields[last_name] (custom field "Last name"). */
+  var WAITLIST_ENDPOINT = "https://app.kit.com/forms/10093957/subscriptions";
   var form = document.getElementById("waitlist-form");
   var msg = document.getElementById("form-msg");
   form.addEventListener("submit", function(e){
@@ -695,8 +696,13 @@ h1,h2,h3,p{margin:0}
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = "Enter a valid email address, like name@example.com."; form.email.focus(); return; }
     if (!WAITLIST_ENDPOINT) { msg.textContent = "Signup isn't connected yet. Add a form endpoint to start collecting emails."; return; }
     msg.textContent = "Joining...";
-    fetch(WAITLIST_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: new FormData(form) })
-      .then(function(r){ if (!r.ok) throw new Error(); form.reset(); msg.textContent = "Thanks, " + first + ". You're on the list. We'll email you with screenings and release news."; })
+    var data = new FormData();
+    data.append("email_address", email);
+    data.append("fields[first_name]", first);
+    data.append("fields[last_name]", last);
+    fetch(WAITLIST_ENDPOINT, { method: "POST", headers: { "Accept": "application/json" }, body: data })
+      .then(function(r){ if (!r.ok) throw new Error(); return r.json().catch(function(){ return {}; }); })
+      .then(function(res){ if (res && res.status && res.status !== "success") throw new Error(); form.reset(); msg.textContent = "Thanks, " + first + ". You're on the list. We'll email you with screenings and release news."; })
       .catch(function(){ msg.textContent = "That didn't go through. Check your connection and try again."; });
   });
 
