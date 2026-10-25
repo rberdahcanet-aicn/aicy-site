@@ -264,8 +264,9 @@ h1,h2,h3,p{margin:0}
 .screening__date--tba{color:var(--ink-muted);font-size:3.2rem}
 .screening__name{font-family:var(--font-display);font-size:3.2rem;line-height:1.05;text-transform:uppercase}
 .screening__note{font-size:1.6rem;color:var(--ink-muted);margin-top:.6rem}
-.screenings-top__laurel{width:22rem;justify-self:end}
-@media (max-width:767px){.screening{grid-template-columns:1fr;gap:1.2rem}.screening__date{font-size:3.6rem}.screenings-top__laurel{justify-self:start;width:16rem}.screening .btn{justify-self:start}}
+.screenings-top__laurels{display:flex;flex-wrap:wrap;gap:3.2rem;justify-self:end;align-items:center}
+.screenings-top__laurel{height:14.6rem;width:auto}
+@media (max-width:767px){.screening{grid-template-columns:1fr;gap:1.2rem}.screening__date{font-size:3.6rem}.screenings-top__laurels{justify-self:stretch;flex-wrap:nowrap;gap:2rem;max-width:36rem}.screenings-top__laurel{height:auto;width:calc(50% - 1rem)}.screening .btn{justify-self:start}}
 
 /* ---------- filmmakers ---------- */
 .people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8rem}
@@ -490,7 +491,10 @@ h1,h2,h3,p{margin:0}
           <p class="eyebrow">Festivals</p>
           <h2 class="display h2" id="screenings-title" style="margin-top:1.6rem">Upcoming screenings</h2>
         </div>
-        <img class="screenings-top__laurel" src="img/philadelphia-2026-laurel-white.webp" alt="Official Selection, Philadelphia Jewish Film + Media Festival 2026" width="700" height="465" loading="lazy">
+        <div class="screenings-top__laurels">
+          <img class="screenings-top__laurel" src="img/philadelphia-2026-laurel-white.webp" alt="Official Selection, Philadelphia Jewish Film + Media Festival 2026" width="700" height="465" loading="lazy">
+          <img class="screenings-top__laurel" src="img/jerusalem-2026-laurel-white.webp" alt="Official Selection, Jerusalem Jewish Film Festival" width="734" height="465" loading="lazy">
+        </div>
       </div>
       <ul class="screenings">
         <li class="screening">
