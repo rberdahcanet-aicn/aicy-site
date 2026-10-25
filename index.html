@@ -159,8 +159,8 @@ h1,h2,h3,p{margin:0}
     linear-gradient(180deg,var(--paper) 0,var(--paper) 24rem,var(--smoke) 36rem,var(--bronze) 48rem,var(--curtain) 62rem,var(--stage) 78rem);
   background-blend-mode:normal,soft-light,normal}
 .hero::before{content:"";position:absolute;inset:0;background:var(--stage);pointer-events:none;animation:lightsUp 1.6s var(--ease) .1s both;z-index:1}
-/* extra paper grain where the gradient is lightest: multiply keeps the cream color, adds the specks */
-.hero::after{content:"";position:absolute;inset:0;background:url("img/paper-grain-dark.webp") center top/480px 480px repeat;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);pointer-events:none;z-index:1}
+/* extra paper grain where the gradient is lightest: transparent specks, no blend modes (blend modes glitch video playback) */
+.hero::after{content:"";position:absolute;inset:0;background:url("img/paper-grain-dark.webp") center top/480px 480px repeat;-webkit-mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);pointer-events:none;z-index:1}
 @keyframes lightsUp{from{opacity:.85}to{opacity:0}}
 .hero>*{position:relative;z-index:2}
 .hero__head{display:grid;justify-items:center;text-align:center;gap:1.6rem;color:var(--on-spotlight)}
@@ -171,7 +171,8 @@ h1,h2,h3,p{margin:0}
 .hero__cta{display:flex;align-items:center;justify-content:center;gap:3.2rem;flex-wrap:wrap;margin-top:2.4rem}
 .hero__tag{font-family:var(--font-display);font-size:2.2rem;letter-spacing:.06em;text-transform:uppercase;color:var(--on-spotlight)}
 .hero__laurel{width:15rem}
-.trailer-wrap{position:relative;left:50%;transform:translateX(-50%);margin:2.8rem 0 0;width:min(100%,128rem,calc((100svh - 44rem) * 1.7778));min-width:min(100%,64rem);transition:width .7s var(--ease),margin .7s var(--ease)}
+/* centered with layout, not transform: a sub-pixel transform makes the Vimeo video render purple with a green seam on Mac */
+.trailer-wrap{--tw:max(min(100%,64rem),min(100%,128rem,calc((100svh - 44rem) * 1.7778)));position:relative;left:50%;width:var(--tw);margin:2.8rem 0 0 calc(var(--tw) / -2);transition:width .7s var(--ease),margin .7s var(--ease)}
 .trailer{position:relative;aspect-ratio:16/9;width:100%;max-width:100%;background:var(--stage);box-shadow:0 2.4rem 4.8rem rgba(0,0,0,.6);overflow:hidden}
 .trailer img,.trailer iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
 .trailer__play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,var(--scrim-clear) 40%,var(--scrim) 100%);border:0;padding:0;cursor:pointer;color:var(--on-spotlight)}
@@ -188,7 +189,7 @@ h1,h2,h3,p{margin:0}
 .hero__head,.hero__cta{max-height:40rem;transition:max-height .7s var(--ease),opacity .35s ease,transform .7s var(--ease),margin .7s var(--ease)}
 .playing .hero{padding-top:8.5rem;padding-bottom:4rem}
 .playing .hero__head,.playing .hero__cta{max-height:0;opacity:0;transform:translateY(-8rem);margin-top:0;overflow:hidden;pointer-events:none}
-.playing .trailer-wrap{width:min(100vw,calc((100svh - 13rem) * 1.7778));min-width:0;margin-top:0}
+.playing .trailer-wrap{--tw:min(100vw,calc((100svh - 13rem) * 1.7778));margin-top:0}
 .header__cta{display:none;font-size:1.6rem;padding:1rem 1.8rem}
 .playing .header__cta{display:inline-flex;animation:liftIn .6s var(--ease) .3s both}
 .playing .brand{animation:liftIn .6s var(--ease) .15s both}
@@ -201,7 +202,7 @@ h1,h2,h3,p{margin:0}
   .hero__eyebrow{font-size:1.2rem;letter-spacing:.12em}
   .hero__cta{flex-direction:column;gap:1.6rem;margin-top:2rem}
   .hero__laurel{display:none}
-  .trailer-wrap{margin-top:2.8rem;min-width:0}
+  .trailer-wrap{--tw:min(100%,128rem,calc((100svh - 44rem) * 1.7778));margin-top:2.8rem}
   .trailer__disc svg{width:4.4rem;height:4.4rem}
   .trailer__label{font-size:1.8rem;left:1.6rem;bottom:1.4rem}
   .brand{font-size:1.1rem;letter-spacing:.08em;gap:.6rem}.brand__logo{height:2.04rem}
