@@ -159,6 +159,8 @@ h1,h2,h3,p{margin:0}
     linear-gradient(180deg,var(--paper) 0,var(--paper) 24rem,var(--smoke) 36rem,var(--bronze) 48rem,var(--curtain) 62rem,var(--stage) 78rem);
   background-blend-mode:normal,soft-light,normal}
 .hero::before{content:"";position:absolute;inset:0;background:var(--stage);pointer-events:none;animation:lightsUp 1.6s var(--ease) .1s both;z-index:1}
+/* extra paper grain where the gradient is lightest: multiply keeps the cream color, adds the specks */
+.hero::after{content:"";position:absolute;inset:0;background:url("img/paper-grain-dark.webp") center top/480px 480px repeat;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);pointer-events:none;z-index:1}
 @keyframes lightsUp{from{opacity:.85}to{opacity:0}}
 .hero>*{position:relative;z-index:2}
 .hero__head{display:grid;justify-items:center;text-align:center;gap:1.6rem;color:var(--on-spotlight)}
