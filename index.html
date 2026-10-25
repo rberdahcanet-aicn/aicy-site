@@ -685,7 +685,10 @@ h1,h2,h3,p{margin:0}
   play.addEventListener("click", function(){
     var box = document.getElementById("trailer");
     var f = document.createElement("iframe");
-    f.src = "https://player.vimeo.com/video/" + VIMEO_ID + "?autoplay=1&title=0&byline=0&portrait=0&color=fdda24&quality=1080p";
+    /* Phones only allow sound when the tap lands on the player itself, so on phones we skip autoplay
+       (which would start muted) and the visitor taps Vimeo's play button to hear it with sound. */
+    var isPhone = window.matchMedia("(max-width:767px), (pointer:coarse)").matches;
+    f.src = "https://player.vimeo.com/video/" + VIMEO_ID + "?" + (isPhone ? "" : "autoplay=1&") + "title=0&byline=0&portrait=0&color=fdda24&quality=1080p";
     f.title = "Am I Cancelled Yet? official trailer";
     f.allow = "autoplay; fullscreen; picture-in-picture";
     f.allowFullscreen = true;
