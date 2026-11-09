@@ -1,4 +1,19 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}/* ---------- screening news fold-out ---------- */
+.news{margin-top:1.6rem}
+.news__toggle{display:inline-flex;align-items:center;gap:.8rem;padding:.4rem 0;border-bottom:.1rem solid currentColor;color:var(--spotlight);font-weight:500;font-size:1.3rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;list-style:none;transition:opacity .2s var(--ease)}
+.news__toggle::-webkit-details-marker{display:none}
+.news__toggle:hover{opacity:.8}
+.news__toggle:focus-visible{outline:.2rem solid var(--spotlight);outline-offset:.4rem}
+.news__toggle .arrow{display:inline-block;transition:transform .3s var(--ease)}
+.news[open] .news__toggle .arrow{transform:rotate(180deg)}
+.news__list{list-style:none;margin:1.6rem 0 0;padding:0}
+.news__list li+li{margin-top:1.2rem}
+.news__list a{display:inline;color:var(--ink);font-size:1.6rem;line-height:1.45;text-decoration:none}
+.news__title{border-bottom:.1rem solid var(--line);transition:border-color .2s var(--ease)}
+.news__list a:hover .news__title{border-color:var(--ink)}
+.news__list a:focus-visible{outline:.2rem solid var(--spotlight);outline-offset:.3rem}
+.news__outlet{display:block;font-weight:500;letter-spacing:.12em;text-transform:uppercase;font-size:1.2rem;color:var(--ink-muted);margin-bottom:.2rem}
+</style></head><body>
 <title>Am I Cancelled Yet? | A documentary featuring Michael Rapaport</title>
 <meta name="description" content="Am I Cancelled Yet? is a documentary featuring Michael Rapaport, directed by Ruth Berdah-Canet. Stand-up comedy meets real life after October 7: laughter, grief and a Hollywood career on the line.">
 <link rel="canonical" href="https://www.amicancelledyetfilm.com/">
@@ -517,12 +532,28 @@ h1,h2,h3,p{margin:0}
       <ul class="screenings">
         <li class="screening">
           <span class="screening__date">Nov 12</span>
-          <div><p class="screening__name">Philadelphia Jewish Film + Media Festival</p><p class="screening__note">Michael in attendance</p></div>
+          <div><p class="screening__name">Philadelphia Jewish Film + Media Festival</p><p class="screening__note">Michael in attendance</p>
+          <details class="news">
+            <summary class="news__toggle"><span>In the news</span> <span class="arrow" aria-hidden="true">&#8595;</span></summary>
+            <ul class="news__list">
+              <li><a href="https://www.goelevent.com/pjfm/e/AMICANCELLEDYET" target="_blank" rel="noopener"><span class="news__outlet">Philadelphia Jewish Film + Media</span><span class="news__title">Am I Cancelled Yet? on the festival program</span> <span aria-hidden="true">&#8599;</span></a></li>
+              <li><a href="https://phillyjfm.org/fall-fest-26-bios/" target="_blank" rel="noopener"><span class="news__outlet">Philadelphia Jewish Film + Media</span><span class="news__title">Fall Fest 26 guest bios</span> <span aria-hidden="true">&#8599;</span></a></li>
+            </ul>
+          </details></div>
           <a class="btn btn--line" href="https://phillyjfm.org/" target="_blank" rel="noopener">Festival site <span aria-hidden="true">&#8599;</span></a>
         </li>
         <li class="screening">
           <span class="screening__date">Dec 10</span>
-          <div><p class="screening__name">Jerusalem Jewish Film Festival</p><p class="screening__note">Michael and Ruth in attendance</p></div>
+          <div><p class="screening__name">Jerusalem Jewish Film Festival</p><p class="screening__note">Michael and Ruth in attendance</p>
+          <details class="news">
+            <summary class="news__toggle"><span>In the news</span> <span class="arrow" aria-hidden="true">&#8595;</span></summary>
+            <ul class="news__list">
+              <li><a href="https://www.ynetnews.com/culture/article/b16c5r0aze" target="_blank" rel="noopener"><span class="news__outlet">Ynetnews</span><span class="news__title">Michael Rapaport brings film on his outspoken support for Israel to Jerusalem Jewish Film Festival</span> <span aria-hidden="true">&#8599;</span></a></li>
+              <li><a href="https://13tv.co.il/item/entertainment/cinema/news/kqfi8-905447676/" target="_blank" rel="noopener"><span class="news__outlet">Channel 13 &middot; Hebrew</span><span class="news__title" lang="he" dir="auto">אחרי התמיכה הפומבית: מייקל רפפורט חוזר לישראל באירוע מיוחד</span> <span aria-hidden="true">&#8599;</span></a></li>
+              <li><a href="https://www.maariv.co.il/culture/movies/article-1386135" target="_blank" rel="noopener"><span class="news__outlet">Maariv &middot; Hebrew</span><span class="news__title" lang="he" dir="auto">מייקל רפפורט מגיע לישראל: הסרט על המחיר ששילם</span> <span aria-hidden="true">&#8599;</span></a></li>
+              <li><a href="https://israj.media-j.com/article/74026/michael-rapaport-et-volker-schlondorff-invites-du-festival-du-film-juif-de-jerusalem-2026" target="_blank" rel="noopener"><span class="news__outlet">IsraJ &middot; French</span><span class="news__title" lang="fr" dir="auto">Michael Rapaport et Volker Schlöndorff, invités du Festival du film juif de Jérusalem 2026</span> <span aria-hidden="true">&#8599;</span></a></li>
+            </ul>
+          </details></div>
           <a class="btn btn--line" href="https://jff.org.il/en/festivals/jerusalem-film-festival-2026" target="_blank" rel="noopener">Festival site <span aria-hidden="true">&#8599;</span></a>
         </li>
         <li class="screening">
