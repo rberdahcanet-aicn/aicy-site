@@ -201,6 +201,11 @@ h1,h2,h3,p{margin:0}
 .trailer__play:focus-visible .trailer__disc{color:var(--spotlight)}
 @media (any-hover:hover){.trailer__play:hover .trailer__disc{color:var(--spotlight);transform:scale(1.08)}}
 .trailer__label{position:absolute;left:3.2rem;bottom:2.8rem;font-family:var(--font-display);font-size:2.4rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+/* "Launching soon" tape over the trailer while playback is paused */
+.launching{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden;background:linear-gradient(180deg,rgba(11,11,9,.15) 30%,rgba(11,11,9,.6));pointer-events:none}
+.launching__tape{position:absolute;left:-10%;right:-10%;display:flex;justify-content:center;gap:6rem;padding:1.4rem 0 1rem;background:var(--spotlight);color:var(--on-spotlight);font-family:var(--font-display);font-size:clamp(2.8rem,4.6vw,7rem);line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transform:rotate(-7deg);box-shadow:0 1rem 3rem rgba(0,0,0,.5)}
+.launching__ready{display:inline-flex;align-items:center;gap:1rem;color:var(--ink)}
+.launching__ready svg{width:1.8rem;height:1.8rem;color:var(--spotlight)}
 .trailer__alt{display:flex;justify-content:space-between;gap:2rem;margin-top:1.4rem;font-size:1.4rem;letter-spacing:.08em;text-transform:uppercase;color:var(--spotlight)}
 .trailer__alt a{text-decoration:none;border-bottom:.1rem solid currentColor}
 
@@ -445,10 +450,11 @@ h1,h2,h3,p{margin:0}
     <div class="trailer-wrap">
       <div class="trailer" id="trailer">
         <img src="img/mike-jaffa-night.webp" alt="Michael Rapaport at night in a lit doorway in Jaffa" width="1440" height="810">
-        <button class="trailer__play" id="play" type="button" aria-label="Play the trailer">
-          <span class="trailer__disc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9z" fill="currentColor"/></svg></span>
-          <span class="trailer__label">Watch the trailer</span>
-        </button>
+        <!-- Trailer paused until launch: restore the <button class="trailer__play" id="play"> block to re-enable playback -->
+        <div class="launching" role="img" aria-label="Trailer ready. Launching soon.">
+          <span class="launching__tape"><span>Launching soon</span><span aria-hidden="true">Launching soon</span><span aria-hidden="true">Launching soon</span></span>
+          <span class="trailer__label launching__ready"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3l16 9-16 9z" fill="currentColor"/></svg>Trailer ready</span>
+        </div>
       </div>
       <div class="trailer__alt">
         <span>Official trailer</span>
@@ -749,7 +755,7 @@ h1,h2,h3,p{margin:0}
   /* Trailer: swap the poster frame for the Vimeo player on click */
   var VIMEO_ID = "1042416844";
   var play = document.getElementById("play");
-  play.addEventListener("click", function(){
+  if (play) play.addEventListener("click", function(){
     var box = document.getElementById("trailer");
     var f = document.createElement("iframe");
     /* Phones only allow sound when the tap lands on the player itself, so on phones we skip autoplay
