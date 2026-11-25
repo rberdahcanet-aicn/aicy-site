@@ -174,11 +174,11 @@ h1,h2,h3,p{margin:0}
   background:
     radial-gradient(ellipse 70% 120% at 50% 0%,var(--scrim-clear) 62%,var(--scrim) 100%),
     url("img/paper-texture.webp") center top/480px 480px repeat,
-    linear-gradient(180deg,var(--paper) 0,var(--paper) 24rem,var(--smoke) 36rem,var(--bronze) 48rem,var(--curtain) 62rem,var(--stage) 78rem);
+    linear-gradient(180deg,var(--paper) 0,var(--paper) 30rem,var(--smoke) 52rem,var(--bronze) 78rem,var(--curtain) 104rem,var(--stage) 126rem);
   background-blend-mode:normal,soft-light,normal}
 .hero::before{content:"";position:absolute;inset:0;background:var(--stage);pointer-events:none;animation:lightsUp 1.6s var(--ease) .1s both;z-index:1}
 /* extra paper grain where the gradient is lightest: transparent specks, no blend modes (blend modes glitch video playback) */
-.hero::after{content:"";position:absolute;inset:0;background:url("img/paper-grain-dark.webp") center top/480px 480px repeat;-webkit-mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);mask-image:linear-gradient(180deg,currentColor 0,currentColor 28rem,transparent 46rem);pointer-events:none;z-index:1}
+.hero::after{content:"";position:absolute;inset:0;background:url("img/paper-grain-dark.webp") center top/480px 480px repeat;-webkit-mask-image:linear-gradient(180deg,currentColor 0,currentColor 34rem,transparent 60rem);mask-image:linear-gradient(180deg,currentColor 0,currentColor 34rem,transparent 60rem);pointer-events:none;z-index:1}
 @keyframes lightsUp{from{opacity:.85}to{opacity:0}}
 .hero>*{position:relative;z-index:2}
 .hero__head{display:grid;justify-items:center;text-align:center;gap:1.6rem;color:var(--on-spotlight)}
@@ -207,7 +207,11 @@ h1,h2,h3,p{margin:0}
 .launching__ready{display:inline-flex;align-items:center;gap:1rem;color:var(--ink)}
 .launching__ready svg{width:1.8rem;height:1.8rem;color:var(--spotlight)}
 /* Hero: two premiere spots above the trailer */
-.premieres{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;width:100%;max-width:128rem;margin:4rem auto 0}
+.premieres__heading{margin:5.6rem 0 0;text-align:center;font-weight:500;font-size:1.8rem;letter-spacing:.2em;text-transform:uppercase;color:var(--on-spotlight)}
+.premieres{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;width:100%;max-width:128rem;margin:2.4rem auto 0}
+.hero .hero__cta--below{margin-top:4.8rem;margin-bottom:7.2rem}
+.btn--waitlist{font-size:2rem;padding:1.6rem 3.2rem;color:var(--ink);border-color:var(--ink)}
+.btn--waitlist:hover{color:var(--spotlight);border-color:var(--spotlight)}
 .premiere{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;padding:3.6rem 4rem 4rem;background:var(--stage);color:var(--ink);border-top:.6rem solid var(--spotlight);text-align:left}
 .premiere__date{font-family:var(--font-display);font-size:3.2rem;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:var(--spotlight)}
 .premiere__city{font-family:var(--font-display);font-weight:400;font-size:9.6rem;line-height:.9;text-transform:uppercase;color:var(--ink)}
@@ -218,7 +222,14 @@ h1,h2,h3,p{margin:0}
 .premiere__text:last-of-type{margin-bottom:1.6rem}
 .nowrap{white-space:nowrap}
 @media (max-width:767px){
-  .premieres{grid-template-columns:1fr;gap:1.6rem;margin-top:3.2rem}
+  .premieres{grid-template-columns:1fr;gap:1.6rem}
+  .premieres__heading{margin-top:4rem;font-size:1.5rem;letter-spacing:.14em}
+  .hero .hero__cta--below{margin-top:3.2rem;margin-bottom:4.8rem}
+  .hero{background:
+    radial-gradient(ellipse 70% 120% at 50% 0%,var(--scrim-clear) 62%,var(--scrim) 100%),
+    url("img/paper-texture.webp") center top/480px 480px repeat,
+    linear-gradient(180deg,var(--paper) 0,var(--paper) 30rem,var(--smoke) 60rem,var(--bronze) 105rem,var(--curtain) 150rem,var(--stage) 185rem);
+    background-blend-mode:normal,soft-light,normal}
   .premiere{padding:2.8rem 2.4rem 3.2rem}
   .premiere__city{font-size:6.4rem}
   .premiere__date{font-size:2.8rem}
@@ -463,10 +474,8 @@ h1,h2,h3,p{margin:0}
       <p class="hero__eyebrow">A documentary featuring Michael Rapaport</p>
       <h1 class="hero__title display" id="hero-title"><img class="hero__logo" src="img/logo.webp" alt="Am I Cancelled Yet?" width="2046" height="419"></h1>
     </div>
-    <div class="hero__cta">
-      <a class="btn btn--ink" href="#waitlist">Join the waitlist <span class="arrow" aria-hidden="true">&#8594;</span></a>
-    </div>
-    <div class="premieres" aria-label="Upcoming premieres">
+    <p class="premieres__heading" id="premieres-heading">Upcoming screenings just announced</p>
+    <div class="premieres" aria-labelledby="premieres-heading">
       <article class="premiere">
         <p class="premiere__date">Dec 10</p>
         <h2 class="premiere__city">Jerusalem</h2>
@@ -482,6 +491,9 @@ h1,h2,h3,p{margin:0}
         <p class="premiere__text"><strong>VIP:</strong> pre-screening meet and greet with the cast and crew.</p>
         <a class="btn btn--spot premiere__btn" href="https://www.eventbrite.com/e/invitation-michael-rapaport-live-talk-film-premier-dec-14th-tickets-2004572167314" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
       </article>
+    </div>
+    <div class="hero__cta hero__cta--below">
+      <a class="btn btn--line btn--waitlist" href="#waitlist">Join the waitlist <span class="arrow" aria-hidden="true">&#8594;</span></a>
     </div>
     <div class="trailer-wrap">
       <div class="trailer" id="trailer">
