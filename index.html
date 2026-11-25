@@ -206,6 +206,25 @@ h1,h2,h3,p{margin:0}
 .launching__tape{position:absolute;left:-10%;right:-10%;display:flex;justify-content:center;gap:6rem;padding:1.4rem 0 1rem;background:var(--spotlight);color:var(--on-spotlight);font-family:var(--font-display);font-size:clamp(2.8rem,4.6vw,7rem);line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transform:rotate(-7deg);box-shadow:0 1rem 3rem rgba(0,0,0,.5)}
 .launching__ready{display:inline-flex;align-items:center;gap:1rem;color:var(--ink)}
 .launching__ready svg{width:1.8rem;height:1.8rem;color:var(--spotlight)}
+/* Hero: two premiere spots above the trailer */
+.premieres{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;width:100%;max-width:128rem;margin:4rem auto 0}
+.premiere{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;padding:3.6rem 4rem 4rem;background:var(--stage);color:var(--ink);border-top:.6rem solid var(--spotlight);text-align:left}
+.premiere__date{font-family:var(--font-display);font-size:3.2rem;line-height:1;letter-spacing:.02em;text-transform:uppercase;color:var(--spotlight)}
+.premiere__city{font-family:var(--font-display);font-weight:400;font-size:9.6rem;line-height:.9;text-transform:uppercase;color:var(--ink)}
+.premiere__kind{font-weight:500;font-size:1.5rem;letter-spacing:.16em;text-transform:uppercase;color:var(--spotlight);margin-bottom:.4rem}
+.premiere__text{font-size:1.8rem;line-height:1.5;max-width:46ch}
+.premiere__text strong{color:var(--spotlight);font-weight:500}
+.premiere__btn{margin-top:auto}
+.premiere__text:last-of-type{margin-bottom:1.6rem}
+.nowrap{white-space:nowrap}
+@media (max-width:767px){
+  .premieres{grid-template-columns:1fr;gap:1.6rem;margin-top:3.2rem}
+  .premiere{padding:2.8rem 2.4rem 3.2rem}
+  .premiere__city{font-size:6.4rem}
+  .premiere__date{font-size:2.8rem}
+  .premiere__text{font-size:1.7rem}
+  .premiere__btn{width:100%}
+}
 .trailer__alt{display:flex;justify-content:space-between;gap:2rem;margin-top:1.4rem;font-size:1.4rem;letter-spacing:.08em;text-transform:uppercase;color:var(--spotlight)}
 .trailer__alt a{text-decoration:none;border-bottom:.1rem solid currentColor}
 
@@ -446,6 +465,23 @@ h1,h2,h3,p{margin:0}
     </div>
     <div class="hero__cta">
       <a class="btn btn--ink" href="#waitlist">Join the waitlist <span class="arrow" aria-hidden="true">&#8594;</span></a>
+    </div>
+    <div class="premieres" aria-label="Upcoming premieres">
+      <article class="premiere">
+        <p class="premiere__date">Dec 10</p>
+        <h2 class="premiere__city">Jerusalem</h2>
+        <p class="premiere__kind">Premiere</p>
+        <p class="premiere__text">Screening followed by a Q&amp;A with Michael Rapaport and director <span class="nowrap">Ruth Berdah-Canet</span>.</p>
+        <a class="btn btn--spot premiere__btn" href="https://jer-cin.org.il/en/event/100190" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
+      </article>
+      <article class="premiere">
+        <p class="premiere__date">Dec 14</p>
+        <h2 class="premiere__city">Tel Aviv</h2>
+        <p class="premiere__kind">Premiere special evening</p>
+        <p class="premiere__text">Screening followed by a Q&amp;A with Michael Rapaport and director <span class="nowrap">Ruth Berdah-Canet</span>.</p>
+        <p class="premiere__text"><strong>VIP:</strong> pre-screening meet and greet with the cast and crew.</p>
+        <a class="btn btn--spot premiere__btn" href="https://www.eventbrite.com/e/invitation-michael-rapaport-live-talk-film-premier-dec-14th-tickets-2004572167314" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
+      </article>
     </div>
     <div class="trailer-wrap">
       <div class="trailer" id="trailer">
