@@ -221,6 +221,11 @@ h1,h2,h3,p{margin:0}
 .premiere__text{font-size:1.8rem;line-height:1.5;max-width:46ch}
 .premiere__text strong{color:var(--spotlight);font-weight:500}
 .premiere__btn{margin-top:auto}
+.premiere__actions{margin-top:auto;display:flex;align-items:center;gap:2.4rem}
+.premiere__actions .btn{flex:none}
+.premiere__cause{font-size:1.5rem;line-height:1.45;color:var(--ink-muted);max-width:30ch}
+.premiere__cause a{color:var(--spotlight);font-weight:500;text-underline-offset:.25em}
+.premiere__cause a:hover{color:var(--ink)}
 .premiere__text:last-of-type{margin-bottom:1.6rem}
 .nowrap{white-space:nowrap}
 @media (max-width:767px){
@@ -238,6 +243,9 @@ h1,h2,h3,p{margin:0}
   .premiere__date{font-size:2.8rem}
   .premiere__text{font-size:1.7rem}
   .premiere__btn{width:100%}
+  .premiere__actions{flex-direction:column;align-items:stretch;gap:1.6rem}
+  .premiere__actions .btn{width:100%}
+  .premiere__cause{max-width:none}
 }
 .trailer__alt{display:flex;justify-content:space-between;gap:2rem;margin-top:1.4rem;font-size:1.4rem;letter-spacing:.08em;text-transform:uppercase;color:var(--spotlight)}
 .trailer__alt a{text-decoration:none;border-bottom:.1rem solid currentColor}
@@ -492,7 +500,10 @@ h1,h2,h3,p{margin:0}
         <p class="premiere__kind">Premiere special evening</p>
         <p class="premiere__text">Screening followed by a Q&amp;A with Michael Rapaport and director <span class="nowrap">Ruth Berdah-Canet</span>.</p>
         <p class="premiere__text"><strong>VIP:</strong> pre-screening meet and greet with the cast and crew.</p>
-        <a class="btn btn--spot premiere__btn" href="https://www.eventbrite.com/e/invitation-michael-rapaport-live-talk-film-premier-dec-14th-tickets-2004572167314" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
+        <div class="premiere__actions">
+          <a class="btn btn--spot" href="https://www.eventbrite.com/e/invitation-michael-rapaport-live-talk-film-premier-dec-14th-tickets-2004572167314" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
+          <p class="premiere__cause">Part of the proceeds will be donated to <a href="https://houseofheroes.org.il/en/" target="_blank" rel="noopener">House of Heroes</a> (NGO rehabilitating wounded warriors).</p>
+        </div>
       </article>
     </div>
     <div class="trailer-wrap">
