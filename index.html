@@ -209,7 +209,8 @@ h1,h2,h3,p{margin:0}
 /* Hero: two premiere spots above the trailer */
 .premieres__heading{margin:5.6rem 0 0;text-align:center;font-family:var(--font-display);font-weight:400;font-size:6.4rem;line-height:.95;letter-spacing:.01em;text-transform:uppercase;color:var(--on-spotlight)}
 .premieres{display:grid;grid-template-columns:1fr 1fr;gap:2.4rem;width:100%;max-width:128rem;margin:3.6rem auto 0}
-.hero .hero__cta--below{margin-top:4.8rem;margin-bottom:7.2rem}
+.hero .hero__cta--below{margin-top:4.8rem;margin-bottom:0}
+.premieres{margin-bottom:6.4rem}
 .btn--waitlist{font-size:2rem;padding:1.6rem 3.2rem;color:var(--ink);border-color:var(--ink)}
 .btn--waitlist:hover{color:var(--spotlight);border-color:var(--spotlight)}
 .premiere{display:flex;flex-direction:column;align-items:flex-start;gap:1.2rem;padding:3.6rem 4rem 4rem;background:var(--stage);color:var(--ink);border-top:.6rem solid var(--spotlight);text-align:left}
@@ -224,7 +225,8 @@ h1,h2,h3,p{margin:0}
 @media (max-width:767px){
   .premieres{grid-template-columns:1fr;gap:1.6rem}
   .premieres__heading{margin-top:4rem;font-size:4.4rem}
-  .hero .hero__cta--below{margin-top:3.2rem;margin-bottom:4.8rem}
+  .hero .hero__cta--below{margin-top:3.2rem;margin-bottom:0}
+  .premieres{margin-bottom:4rem}
   .hero{background:
     radial-gradient(ellipse 70% 120% at 50% 0%,var(--scrim-clear) 62%,var(--scrim) 100%),
     url("img/paper-texture.webp") center top/480px 480px repeat,
@@ -492,9 +494,6 @@ h1,h2,h3,p{margin:0}
         <a class="btn btn--spot premiere__btn" href="https://www.eventbrite.com/e/invitation-michael-rapaport-live-talk-film-premier-dec-14th-tickets-2004572167314" target="_blank" rel="noopener">Buy tickets <span aria-hidden="true">&#8599;</span></a>
       </article>
     </div>
-    <div class="hero__cta hero__cta--below">
-      <a class="btn btn--line btn--waitlist" href="#waitlist">Join the waitlist <span class="arrow" aria-hidden="true">&#8594;</span></a>
-    </div>
     <div class="trailer-wrap">
       <div class="trailer" id="trailer">
         <img src="img/mike-jaffa-night.webp" alt="Michael Rapaport at night in a lit doorway in Jaffa" width="1440" height="810">
@@ -507,6 +506,9 @@ h1,h2,h3,p{margin:0}
       <div class="trailer__alt">
         <span>Official trailer</span>
       </div>
+    </div>
+    <div class="hero__cta hero__cta--below">
+      <a class="btn btn--line btn--waitlist" href="#waitlist">Join the waitlist <span class="arrow" aria-hidden="true">&#8594;</span></a>
     </div>
   </section>
 
